@@ -22,9 +22,8 @@ export default function RootLayout({
               <Image
                 src={logoCorteja}
                 alt="Logo Cortejá"
-                width={150}
-                height={0}
                 loading="eager"
+                className="w-37.5"
               ></Image>
             </Link>
 
