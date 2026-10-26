@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning className={inter.className}>
       <body suppressHydrationWarning>
-        <div className="grid grid-cols-[1fr] grid-rows-[80px_1fr_80px]">
+        <div className="min-h-svh grid grid-cols-[1fr] grid-rows-[80px_1fr_80px]">
           <header className="flex flex-row justify-between items-center col-start-1 col-end-2 row-start-1 row-end-2 bg-surface p-10 shadow-md z-1000 sticky top-0">
             <Link href="/">
               <Image
