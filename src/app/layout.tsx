@@ -17,7 +17,7 @@ export default function RootLayout({
     <html suppressHydrationWarning className={inter.className}>
       <body suppressHydrationWarning>
         <div className="min-h-svh grid grid-cols-[1fr] grid-rows-[80px_1fr_80px]">
-          <header className="flex flex-row justify-between items-center col-start-1 col-end-2 row-start-1 row-end-2 bg-surface p-10 shadow-md z-1000 sticky top-0">
+          <header className="flex flex-row justify-between items-center col-start-1 col-end-2 row-start-1 row-end-2 bg-surface p-10  shadow-md z-1000 sticky top-0">
             <Link href="/">
               <Image
                 src={logoCorteja}
@@ -48,7 +48,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     href="/cadastro"
-                    className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary  text-[1.1rem]"
+                    className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[1.1rem]"
                   >
                     Cadastre-se
                   </Link>

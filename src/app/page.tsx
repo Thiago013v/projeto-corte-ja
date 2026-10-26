@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import imagemBarbeiro from "../../public/eugene-chystiakov-taZSJ6xmt48-unsplash.jpg";
 import { FaSearch } from "react-icons/fa";
 import { GrSchedules } from "react-icons/gr";
 import { IoMdCut } from "react-icons/io";
@@ -6,7 +8,7 @@ import { IoMdCut } from "react-icons/io";
 export default function Page() {
   return (
     <main className="col-start-1 col-end-2 row-start-2 row-end-3">
-      <section className="h-full bg-[url('../../public/imagem-secao-hero.jpg')] bg-center bg-cover bg-no-repeat ">
+      <section className="h-full bg-[url('../../public/imagem-secao-hero.jpg')] bg-center bg-cover bg-no-repeat max-h-187">
         <div className="h-full flex flex-col justify-center gap-15 ml-15">
           <h1 className="text-8xl text-secondary font-bold">CorteJá</h1>
           <div>
@@ -59,6 +61,38 @@ export default function Page() {
                 <p className="text-secondary text-3xl font-bold">Cortar</p>
               </div>
             </div>
+          </div>
+        </section>
+        <section className="flex flex-col justify-center items-center">
+          <h2 className="text-5xl text-secondary font-bold mt-20">
+            Sua barbearia merece ser descoberta.
+          </h2>
+
+          <div className="flex flex-col justify-center items-center bg-tertiary p-5 rounded-lg mt-12">
+            <Image
+              src={imagemBarbeiro}
+              alt="Imagem de barbeiro"
+              className="w-90 rounded-lg shadow-md"
+            ></Image>
+            <div className="flex flex-col justify-center items-start mt-4">
+              <p className="text-primary font-bold">
+                Cadastre seu estabelecimento, apresente seus serviços e
+              </p>
+              <p className="text-primary font-bold">
+                disponibilize seus horários para que novos clientes possam
+                conhecer
+              </p>
+              <p className="text-primary font-bold">
+                seu negócio e agendar um corte.
+              </p>
+            </div>
+
+            <Link
+              href="/cadastro"
+              className="bg-secondary p-3 rounded-md text-surface hover:bg-hover-secondary text-[1.1rem] mt-4 font-bold"
+            >
+              Cadastrar Barbearia
+            </Link>
           </div>
         </section>
       </section>
