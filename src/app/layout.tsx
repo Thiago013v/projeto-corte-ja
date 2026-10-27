@@ -17,7 +17,7 @@ export default function RootLayout({
     <html suppressHydrationWarning className={inter.className}>
       <body suppressHydrationWarning>
         <div className="min-h-svh">
-          <header className="flex flex-row justify-between items-center bg-surface pl-4 pr-4 pb-2 pt-2  shadow-md z-1000 sticky top-0">
+          <header className="flex flex-col sm:flex-row justify-between items-center bg-surface pl-4 pr-4 pb-2 pt-2  shadow-md z-1000 sticky top-0">
             <Link href="/">
               <Image
                 src={logoCorteja}
@@ -32,7 +32,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     href="/"
-                    className="hover:underline hover:underline-offset-1 text-[1.1rem]"
+                    className="hover:underline hover:underline-offset-1 text-[14px] sm:text-[1.1rem]"
                   >
                     Página Inicial
                   </Link>
@@ -40,7 +40,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     href="/catalogo"
-                    className="hover:underline hover:underline-offset-1 text-[1.1rem]"
+                    className="hover:underline hover:underline-offset-1 text-[15px] sm:text-[1.1rem]"
                   >
                     Catálogo
                   </Link>
@@ -48,7 +48,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     href="/cadastro"
-                    className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[1.1rem]"
+                    className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[15px] sm:text-[1.1rem]"
                   >
                     Cadastre-se
                   </Link>
@@ -59,7 +59,7 @@ export default function RootLayout({
 
           {children}
 
-          <footer className="flex flex-row justify-center items-center bg-secondary p-5 mt-15">
+          <footer className="flex flex-row justify-center items-center bg-secondary text-[15px] sm:text-1xl p-5 mt-10 sm:mt-15">
             <p className="text-surface font-bold">
               CorteJá. Todos os direitos reservados.
             </p>
