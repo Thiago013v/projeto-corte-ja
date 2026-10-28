@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning className={inter.className}>
       <body suppressHydrationWarning>
-        <div className="min-h-svh">
+        <div className="min-h-svh grid grid-cols-[1fr] sm:grid-rows-[115.517px_1fr] md:grid-rows-[91.5167px_1fr]">
           <header className="flex flex-col sm:flex-row justify-between items-center bg-surface pl-4 pr-4 pb-2 pt-2  shadow-md z-1000 sticky top-0">
             <Link href="/">
               <Image
@@ -58,12 +58,6 @@ export default function RootLayout({
           </header>
 
           {children}
-
-          <footer className="flex flex-row justify-center items-center bg-secondary text-[15px] sm:text-1xl p-5 mt-10 sm:mt-15">
-            <p className="text-surface font-bold">
-              CorteJá. Todos os direitos reservados.
-            </p>
-          </footer>
         </div>
       </body>
     </html>
