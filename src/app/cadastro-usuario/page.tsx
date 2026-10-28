@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CadasterUser() {
   return (
     <main className="flex flex-col justify-center items-center">
@@ -38,6 +40,13 @@ export default function CadasterUser() {
         <button className="p-4 bg-secondary text-surface font-bold text-3xl rounded-md">
           Cadastrar
         </button>
+
+        <p className="text-zinc-400">
+          Já tem uma conta?{" "}
+          <Link className="text-secondary font-bold" href="/login">
+            Faça Login
+          </Link>
+        </p>
       </div>
     </main>
   );
