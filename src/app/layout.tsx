@@ -47,7 +47,7 @@ export default function RootLayout({
                 </li>
                 <li>
                   <Link
-                    href="/cadastro"
+                    href="/cadastro-usuario"
                     className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[15px] sm:text-[1.1rem]"
                   >
                     Cadastre-se
