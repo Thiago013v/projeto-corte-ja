@@ -6,7 +6,7 @@ import teste from "../../../../public/imagem-secao-hero.jpg";
 export default function CardBarber() {
   return (
     <div className="flex flex-col max-w-62 bg-primary p-4 rounded-md shadow-md">
-      <Image src={teste} alt="teste" width={200}></Image>
+      <Image src={teste} alt="teste" width={200} className="w-auto"></Image>
 
       <div>
         <h3 className="text-surface font-bold text-2xl">Barbearia</h3>

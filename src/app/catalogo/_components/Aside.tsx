@@ -19,11 +19,11 @@ import {
 
 export default function Aside() {
   return (
-    <aside className="flex flex-col gap-6 justify-center items-center col-start-1 col-end-2 row-start-1 row-end-2">
-      <h1 className="text-3xl text-secondary font-semibold">
+    <aside className="flex flex-col gap-6 justify-center items-center col-start-1 col-end-2 row-start-1 row-end-2 max-lg:mt-10 max-lg:mb-10">
+      <h1 className="text-2xl md:text-3xl text-center text-secondary font-semibold">
         Busque a Barbearia desejada
       </h1>
-      <div className="flex flex-col gap-6 bg-cards p-8 rounded-md shadow-2xl">
+      <div className="flex flex-col gap-6 bg-cards p-8 w-[80%] rounded-md shadow-2xl">
         <div className="flex flex-col gap-2">
           <label
             htmlFor="name"
@@ -33,7 +33,7 @@ export default function Aside() {
           </label>
           <Input
             placeholder="Digite o nome da barbearia"
-            className="h-8 bg-surface"
+            className="h-10 bg-surface"
             id="name"
             name="name"
           ></Input>
@@ -132,7 +132,7 @@ export default function Aside() {
           </label>
           <Input
             placeholder="Digite o nome da cidade"
-            className="h-8 bg-surface"
+            className="h-10 bg-surface"
             id="city"
             name="city"
           ></Input>
