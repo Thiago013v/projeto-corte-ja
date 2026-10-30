@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import logoCorteja from "../../public/logo-corteja.png";
 import Link from "next/link";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -57,7 +58,7 @@ export default function RootLayout({
             </nav>
           </header>
 
-          {children}
+          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
         </div>
       </body>
     </html>
