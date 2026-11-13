@@ -16,6 +16,8 @@ const schemaCadasterUser = yup.object({
     .oneOf([yup.ref("password")], "*As senhas não coincidem"),
 });
 
+type typeData = yup.InferType<typeof schemaCadasterUser>;
+
 export function useCadaster() {
   const {
     formState: { errors },
@@ -23,5 +25,9 @@ export function useCadaster() {
     control,
   } = useForm({ resolver: yupResolver(schemaCadasterUser) });
 
-  return { Controller, handleSubmit, errors, control };
+  const onSubmit = (data: typeData) => {
+    console.log(data);
+  };
+
+  return { Controller, handleSubmit, errors, control, onSubmit };
 }
