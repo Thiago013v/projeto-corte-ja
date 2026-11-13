@@ -7,11 +7,13 @@ import Link from "next/link";
 import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
 import { useState } from "react";
+import { useCadaster } from "../_hooks/useCadaster";
 
 export default function CardCadaster() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+  const { Controller, control } = useCadaster();
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 bg-cards w-[95%] max-sm:mt-5 lg:w-[30%] p-6 shadow-md rounded-md">
@@ -21,25 +23,63 @@ export default function CardCadaster() {
         <label htmlFor="name" className="text-2xl text-secondary font-bold">
           Nome Completo
         </label>
-        <Input className="h-10 bg-surface" name="name" id="name"></Input>
+        <Controller
+          name="fullName"
+          control={control}
+          render={({ field }) => (
+            <Input
+              className="h-10 bg-surface"
+              name={field.name}
+              id="fullName"
+              defaultValue={field.value}
+              ref={field.ref}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+            ></Input>
+          )}
+        ></Controller>
       </div>
       <div className="flex flex-col gap-2 w-[70%]">
         <label htmlFor="email" className="text-2xl text-secondary font-bold">
           Email
         </label>
-        <Input className="h-10 bg-surface" name="email" id="email"></Input>
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <Input
+              className="h-10 bg-surface"
+              name={field.name}
+              id="email"
+              defaultValue={field.value}
+              ref={field.ref}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+            ></Input>
+          )}
+        ></Controller>
       </div>
       <div className="flex flex-col gap-2 w-[70%]">
         <label htmlFor="password" className="text-2xl text-secondary font-bold">
           Senha
         </label>
         <ButtonGroup className="w-full">
-          <Input
-            className="h-10 bg-surface"
+          <Controller
             name="password"
-            id="password"
-            type={showPassword ? "text" : "password"}
-          ></Input>
+            control={control}
+            render={({ field }) => (
+              <Input
+                className="h-10 bg-surface"
+                name={field.name}
+                id="password"
+                defaultValue={field.value}
+                ref={field.ref}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                type={showPassword ? "text" : "password"}
+              ></Input>
+            )}
+          ></Controller>
           <Button
             className="bg-surface shadow-md h-10"
             onClick={() => setShowPassword(!showPassword)}
@@ -56,12 +96,22 @@ export default function CardCadaster() {
           Confirmar Senha
         </label>
         <ButtonGroup className="w-full">
-          <Input
-            className="h-10 bg-surface"
-            name="confirm-password"
-            id="confirm-password"
-            type={showConfirmPassword ? "text" : "password"}
-          ></Input>
+          <Controller
+            name="confirmPassword"
+            control={control}
+            render={({ field }) => (
+              <Input
+                className="h-10 bg-surface"
+                name={field.name}
+                id="confirmPassword"
+                defaultValue={field.value}
+                ref={field.ref}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                type={showConfirmPassword ? "text" : "password"}
+              ></Input>
+            )}
+          ></Controller>
           <Button
             className="bg-surface shadow-md h-10"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
