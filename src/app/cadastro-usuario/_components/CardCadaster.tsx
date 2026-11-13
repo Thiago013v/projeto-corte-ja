@@ -19,7 +19,7 @@ export default function CardCadaster() {
 
       <div className="flex flex-col gap-2 w-[70%]">
         <label htmlFor="name" className="text-2xl text-secondary font-bold">
-          Nome
+          Nome Completo
         </label>
         <Input className="h-10 bg-surface" name="name" id="name"></Input>
       </div>
