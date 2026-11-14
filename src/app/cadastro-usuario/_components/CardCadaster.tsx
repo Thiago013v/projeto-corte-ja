@@ -8,7 +8,6 @@ import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
 import { useState } from "react";
 import { useCadaster } from "../_hooks/useCadaster";
-import CardConfirmationEmail from "./CardConfirmationEmail";
 
 export default function CardCadaster() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -16,9 +15,6 @@ export default function CardCadaster() {
     useState<boolean>(false);
   const { Controller, control, handleSubmit, onSubmit, errors } = useCadaster();
 
-  return <CardConfirmationEmail></CardConfirmationEmail>;
-
-  /*
   return (
     <div className="flex flex-col justify-center items-center gap-2 bg-cards w-[95%] max-sm:mt-5 lg:w-[30%] p-6 shadow-md rounded-md">
       <h1 className="text-5xl text-secondary font-bold mb-4">Cadastro</h1>
@@ -169,5 +165,4 @@ export default function CardCadaster() {
       </p>
     </div>
   );
-  */
 }

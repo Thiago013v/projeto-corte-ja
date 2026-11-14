@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Controller } from "react-hook-form";
 import { createClient } from "@/lib/supabase/client";
+import useCadasterContext from "./useCadasterContext";
 
 const schemaCadasterUser = yup.object({
   fullName: yup.string().required("*Este campo é obrigatório"),
@@ -26,6 +27,8 @@ export function useCadaster() {
     control,
   } = useForm({ resolver: yupResolver(schemaCadasterUser) });
 
+  const { setShowCardConfirmation } = useCadasterContext();
+
   const onSubmit = async (dataCadaster: typeData) => {
     const supabase = createClient();
 
@@ -40,7 +43,15 @@ export function useCadaster() {
         },
       },
     });
+
+    setShowCardConfirmation(true);
   };
 
-  return { Controller, handleSubmit, errors, control, onSubmit };
+  return {
+    Controller,
+    handleSubmit,
+    errors,
+    control,
+    onSubmit,
+  };
 }
