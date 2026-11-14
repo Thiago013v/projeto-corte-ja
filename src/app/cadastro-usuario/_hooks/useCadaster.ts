@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Controller } from "react-hook-form";
+import { createClient } from "@/lib/supabase/client";
 
 const schemaCadasterUser = yup.object({
   fullName: yup.string().required("*Este campo é obrigatório"),
@@ -25,8 +26,23 @@ export function useCadaster() {
     control,
   } = useForm({ resolver: yupResolver(schemaCadasterUser) });
 
-  const onSubmit = (data: typeData) => {
+  const onSubmit = async (dataCadaster: typeData) => {
+    const supabase = createClient();
+
+    const { data, error } = await supabase.auth.signUp({
+      email: dataCadaster.email,
+      password: dataCadaster.password,
+      options: {
+        emailRedirectTo: "http://localhost:3000/catalogo",
+        data: {
+          full_name: dataCadaster.fullName,
+          role: "user",
+        },
+      },
+    });
+
     console.log(data);
+    console.log(error);
   };
 
   return { Controller, handleSubmit, errors, control, onSubmit };
