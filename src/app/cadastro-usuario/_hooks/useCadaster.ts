@@ -29,7 +29,7 @@ export function useCadaster() {
   const onSubmit = async (dataCadaster: typeData) => {
     const supabase = createClient();
 
-    const { data, error } = await supabase.auth.signUp({
+    await supabase.auth.signUp({
       email: dataCadaster.email,
       password: dataCadaster.password,
       options: {
@@ -40,9 +40,6 @@ export function useCadaster() {
         },
       },
     });
-
-    console.log(data);
-    console.log(error);
   };
 
   return { Controller, handleSubmit, errors, control, onSubmit };
