@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { Controller } from "react-hook-form";
 import { createClient } from "@/lib/supabase/client";
 import useCadasterContext from "./useCadasterContext";
+import { useState } from "react";
 
 const schemaCadasterUser = yup.object({
   fullName: yup.string().required("*Este campo é obrigatório"),
@@ -25,11 +26,24 @@ export function useCadaster() {
     formState: { errors },
     handleSubmit,
     control,
-  } = useForm({ resolver: yupResolver(schemaCadasterUser) });
+  } = useForm({
+    resolver: yupResolver(schemaCadasterUser),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
   const { setShowCardConfirmation } = useCadasterContext();
+  const [isSending, setIsSending] = useState(false);
+  const [isSend, setIsSend] = useState(false);
 
   const onSubmit = async (dataCadaster: typeData) => {
+    setIsSend(true);
+    setIsSending(true);
+
     const supabase = createClient();
 
     await supabase.auth.signUp({
@@ -53,5 +67,7 @@ export function useCadaster() {
     errors,
     control,
     onSubmit,
+    isSending,
+    isSend,
   };
 }

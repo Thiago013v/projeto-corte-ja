@@ -15,7 +15,7 @@ export default function CadasterUser() {
         >
           <CardCadaster></CardCadaster>
         </div>
-        <CardConfirmationEmail></CardConfirmationEmail>;
+        <CardConfirmationEmail></CardConfirmationEmail>
       </main>
     </>
   );
