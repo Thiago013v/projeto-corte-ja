@@ -1,9 +1,13 @@
+"use client";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import logoCorteja from "../../public/logo-corteja.png";
 import Link from "next/link";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,6 +18,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [user, setUser] = useState<object | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+  }, []);
+
   return (
     <html suppressHydrationWarning className={inter.className}>
       <body suppressHydrationWarning>
@@ -47,12 +61,25 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/cadastro-usuario"
-                    className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[15px] sm:text-[1.1rem]"
-                  >
-                    Cadastre-se
-                  </Link>
+                  {user ? (
+                    <button
+                      className="bg-secondary pt-1.5 pb-1.5 pr-8 pl-8 rounded-md text-surface hover:bg-hover-secondary text-[15px] sm:text-[1.1rem] cursor-pointer"
+                      onClick={async () => {
+                        const supabase = createClient();
+
+                        await supabase.auth.signOut();
+                      }}
+                    >
+                      Sair
+                    </button>
+                  ) : (
+                    <Link
+                      href="/cadastro-usuario"
+                      className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[15px] sm:text-[1.1rem]"
+                    >
+                      Cadastre-se
+                    </Link>
+                  )}
                 </li>
               </ul>
             </nav>
