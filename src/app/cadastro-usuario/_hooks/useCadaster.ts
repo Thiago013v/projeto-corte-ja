@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Controller } from "react-hook-form";
+import { createClient } from "@/lib/supabase/client";
+import useCadasterContext from "./useCadasterContext";
+import { useState } from "react";
 
 const schemaCadasterUser = yup.object({
   fullName: yup.string().required("*Este campo é obrigatório"),
@@ -23,11 +26,48 @@ export function useCadaster() {
     formState: { errors },
     handleSubmit,
     control,
-  } = useForm({ resolver: yupResolver(schemaCadasterUser) });
+  } = useForm({
+    resolver: yupResolver(schemaCadasterUser),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
-  const onSubmit = (data: typeData) => {
-    console.log(data);
+  const { setShowCardConfirmation } = useCadasterContext();
+  const [isSending, setIsSending] = useState(false);
+  const [isSend, setIsSend] = useState(false);
+
+  const onSubmit = async (dataCadaster: typeData) => {
+    setIsSend(true);
+    setIsSending(true);
+
+    const supabase = createClient();
+
+    await supabase.auth.signUp({
+      email: dataCadaster.email,
+      password: dataCadaster.password,
+      options: {
+        emailRedirectTo: "http://localhost:3000/catalogo",
+        data: {
+          full_name: dataCadaster.fullName,
+          role: "user",
+        },
+      },
+    });
+
+    setShowCardConfirmation(true);
   };
 
-  return { Controller, handleSubmit, errors, control, onSubmit };
+  return {
+    Controller,
+    handleSubmit,
+    errors,
+    control,
+    onSubmit,
+    isSending,
+    isSend,
+  };
 }

@@ -3,6 +3,7 @@
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import Link from "next/link";
 import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
@@ -13,7 +14,15 @@ export default function CardCadaster() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
-  const { Controller, control, handleSubmit, onSubmit, errors } = useCadaster();
+  const {
+    Controller,
+    control,
+    handleSubmit,
+    onSubmit,
+    errors,
+    isSending,
+    isSend,
+  } = useCadaster();
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 bg-cards w-[95%] max-sm:mt-5 lg:w-[30%] p-6 shadow-md rounded-md">
@@ -152,8 +161,18 @@ export default function CardCadaster() {
             </Button>
           </ButtonGroup>
         </div>
-        <button className="p-2 bg-secondary text-surface font-bold text-3xl rounded-md hover:bg-hover-secondary cursor-pointer w-[70%] mt-3">
-          Cadastrar
+        <button
+          disabled={isSend ? true : false}
+          className="p-2 bg-secondary text-surface font-bold text-3xl rounded-md hover:bg-hover-secondary cursor-pointer w-[70%] mt-3"
+        >
+          {isSending ? (
+            <p className={`flex flex-row justify-center items-center gap-2`}>
+              <Spinner className="w-8 h-8"></Spinner>
+              Cadastrando
+            </p>
+          ) : (
+            <p>Cadastrar</p>
+          )}
         </button>
       </form>
 
