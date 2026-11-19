@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/client";
 
 const schemaLogin = yup.object({
   email: yup
@@ -28,7 +28,7 @@ export default function useLogin() {
   });
 
   const onSubmit = async (data: loginType) => {
-    const supabase = await createClient();
+    const supabase = createClient();
 
     await supabase.auth.signInWithPassword({
       email: data.email,
@@ -41,5 +41,6 @@ export default function useLogin() {
     errors,
     handleSubmit,
     onSubmit,
+    Controller,
   };
 }
