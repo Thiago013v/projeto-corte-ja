@@ -3,6 +3,8 @@ import { Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const schemaLogin = yup.object({
   email: yup
@@ -15,6 +17,11 @@ const schemaLogin = yup.object({
 type loginType = yup.InferType<typeof schemaLogin>;
 
 export default function useLogin() {
+  const router = useRouter();
+
+  const [isSending, setIsSending] = useState(false);
+  const [isSend, setIsSend] = useState(false);
+
   const {
     control,
     formState: { errors },
@@ -28,12 +35,25 @@ export default function useLogin() {
   });
 
   const onSubmit = async (data: loginType) => {
+    setIsSend(true);
+    setIsSending(true);
+
     const supabase = createClient();
 
-    await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
     });
+
+    if (error) {
+      /* Futuramente iremos trabalhar com os erros nesse projeto */
+      console.log(error);
+
+      return;
+    }
+
+    setIsSending(false);
+    router.push("/catalogo");
   };
 
   return {
@@ -42,5 +62,7 @@ export default function useLogin() {
     handleSubmit,
     onSubmit,
     Controller,
+    isSend,
+    isSending,
   };
 }

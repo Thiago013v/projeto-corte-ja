@@ -8,10 +8,19 @@ import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
 import { useState } from "react";
 import useLogin from "../_hooks/useLogin";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function CardLogin() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { control, errors, handleSubmit, onSubmit, Controller } = useLogin();
+  const {
+    control,
+    errors,
+    handleSubmit,
+    onSubmit,
+    Controller,
+    isSend,
+    isSending,
+  } = useLogin();
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 bg-cards w-[95%] max-sm:mt-5 md:w-[60%] lg:w-[30%] p-6 shadow-md rounded-md">
@@ -83,13 +92,21 @@ export default function CardLogin() {
             <Button
               className="bg-surface shadow-md h-10"
               onClick={() => setShowPassword(!showPassword)}
+              isDisabled={isSend ? true : false}
             >
               {showPassword ? <IoEyeOff /> : <IoEye />}
             </Button>
           </ButtonGroup>
         </div>
         <button className="p-2 bg-secondary text-surface font-bold text-3xl rounded-md hover:bg-hover-secondary cursor-pointer w-[70%] mt-3">
-          Entrar
+          {isSending ? (
+            <p className={`flex flex-row justify-center items-center gap-2`}>
+              <Spinner className="w-8 h-8"></Spinner>
+              Entrando
+            </p>
+          ) : (
+            <p>Entrar</p>
+          )}
         </button>
       </form>
 
