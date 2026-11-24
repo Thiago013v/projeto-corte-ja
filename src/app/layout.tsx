@@ -19,6 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<object | null>(null);
+  const [isBarber, setIsBarber] = useState<boolean>(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -26,12 +27,32 @@ export default function RootLayout({
     supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
     });
+
+    async function confirmBarberUser() {
+      const userInfo = await supabase.from("users").select("role");
+
+      if (userInfo.data && userInfo.data?.length > 0) {
+        if (userInfo.data[0].role) {
+          const userRole: string = userInfo.data[0].role;
+
+          if (userRole === "barber") {
+            setIsBarber(true);
+            return;
+          }
+        }
+      }
+    }
+
+    confirmBarberUser();
   }, []);
 
   return (
     <html suppressHydrationWarning className={inter.className}>
       <body suppressHydrationWarning>
-        <div className="min-h-svh grid grid-cols-[1fr] sm:grid-rows-[115.517px_1fr] md:grid-rows-[91.5167px_1fr]">
+        <div
+          className="min-h-svh grid grid-cols-[1fr] 
+          sm:grid-rows-[115.517px_1fr] md:grid-rows-[91.5167px_1fr]"
+        >
           <header className="flex flex-col sm:flex-row justify-between items-center bg-surface pl-4 pr-4 pb-2 pt-2  shadow-md z-1000 sticky top-0">
             <Link href="/">
               <Image
@@ -43,7 +64,9 @@ export default function RootLayout({
             </Link>
 
             <nav>
-              <ul className="flex flex-row justify-center items-center gap-8">
+              <ul
+                className={`flex flex-row ${isBarber && "flex-wrap"} justify-center items-center gap-8`}
+              >
                 <li>
                   <Link
                     href="/"
@@ -59,6 +82,16 @@ export default function RootLayout({
                   >
                     Catálogo
                   </Link>
+                </li>
+                <li>
+                  {user && isBarber && (
+                    <Link
+                      href="/cadastro-usuario"
+                      className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[15px] sm:text-[1.1rem]"
+                    >
+                      Cadastrar Barbearia
+                    </Link>
+                  )}
                 </li>
                 <li>
                   {user ? (

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import imagemBarbeiro from "../../public/eugene-chystiakov-taZSJ6xmt48-unsplash.jpg";
@@ -5,12 +7,39 @@ import { FaSearch } from "react-icons/fa";
 import { GrSchedules } from "react-icons/gr";
 import { IoMdCut } from "react-icons/io";
 import * as motion from "motion/react-client";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Page() {
+  const [isBarber, setIsBarber] = useState<boolean>(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    async function confirmBarberUser() {
+      const userInfo = await supabase.from("users").select("role");
+
+      if (userInfo.data && userInfo.data?.length > 0) {
+        if (userInfo.data[0].role) {
+          const userRole: string = userInfo.data[0].role;
+
+          if (userRole === "barber") {
+            setIsBarber(true);
+            return;
+          }
+        }
+      }
+    }
+
+    confirmBarberUser();
+  }, []);
+
   return (
     <>
       <main>
-        <section className="h-[calc(100svh-115.517px)] sm:h-[calc(100svh-91.5167px)] flex flex-col justify-center bg-[url('../../public/imagem-secao-hero.jpg')] bg-center bg-cover bg-no-repeat">
+        <section
+          className={`${isBarber && "max-sm:h-[calc(100svh-182.017px)]"} h-[calc(100svh-115.517px)] sm:h-[calc(100svh-91.5167px)] flex flex-col justify-center bg-[url('../../public/imagem-secao-hero.jpg')] bg-center bg-cover bg-no-repeat`}
+        >
           <motion.div
             className="h-full flex flex-col justify-center gap-10 sm:gap-15"
             initial={{ opacity: 0, marginLeft: 0 }}
