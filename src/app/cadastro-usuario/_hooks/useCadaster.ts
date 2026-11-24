@@ -39,6 +39,7 @@ export function useCadaster() {
   const { setShowCardConfirmation } = useCadasterContext();
   const [isSending, setIsSending] = useState(false);
   const [isSend, setIsSend] = useState(false);
+  const [role, setRole] = useState<"user" | "barber">("user");
 
   const onSubmit = async (dataCadaster: typeData) => {
     setIsSend(true);
@@ -53,7 +54,7 @@ export function useCadaster() {
         emailRedirectTo: "http://localhost:3000/catalogo",
         data: {
           full_name: dataCadaster.fullName,
-          role: "user",
+          role: role,
         },
       },
     });
@@ -69,5 +70,7 @@ export function useCadaster() {
     onSubmit,
     isSending,
     isSend,
+    role,
+    setRole,
   };
 }

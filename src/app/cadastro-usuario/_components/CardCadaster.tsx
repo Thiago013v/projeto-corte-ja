@@ -14,6 +14,7 @@ export default function CardCadaster() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+
   const {
     Controller,
     control,
@@ -22,6 +23,8 @@ export default function CardCadaster() {
     errors,
     isSending,
     isSend,
+    role,
+    setRole,
   } = useCadaster();
 
   return (
@@ -158,6 +161,28 @@ export default function CardCadaster() {
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? <IoEyeOff /> : <IoEye />}
+            </Button>
+          </ButtonGroup>
+        </div>
+
+        <div className="flex flex-col justify-center items-center gap-2 w-full mt-4">
+          <p className="text-2xl text-secondary font-bold">
+            Qual será o tipo da sua conta?
+          </p>
+
+          <ButtonGroup className="flex flex-row justify-center items-center">
+            <Button
+              onClick={() => setRole("user")}
+              className={`${role === "barber" ? "bg-surface text-black hover:bg-hover-secondary hover:text-surface" : "bg-secondary text-surface"} p-4 font-bold cursor-pointer`}
+            >
+              Usuário
+            </Button>
+
+            <Button
+              onClick={() => setRole("barber")}
+              className={`${role === "user" ? "bg-surface text-black hover:bg-hover-secondary hover:text-surface" : "bg-secondary text-surface"} p-4 font-bold cursor-pointer`}
+            >
+              Barbeiro
             </Button>
           </ButtonGroup>
         </div>
