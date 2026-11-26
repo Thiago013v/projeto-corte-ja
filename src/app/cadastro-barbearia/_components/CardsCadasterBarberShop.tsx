@@ -1,61 +1,323 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import type { StateType } from "../../../lib/states/states";
+import {
+  SouthEast,
+  South,
+  CentralWest,
+  NorthEast,
+  North,
+} from "../../../lib/states/states";
+import useCadasterBarberShop from "../_hooks/useCadasterBarberShop";
+
+/* PRÓXIMOS OBJETIVOS: 
+
+    1 - ADICIONAR RESPONSIVIDADE
+    2 - PERMITIR O CADASTRO DE UMA NOVA BARBEARIA
+*/
 
 export default function CardsCadasterBarberShop() {
+  const { Controller, control, errors, handleSubmit, onSubmit } =
+    useCadasterBarberShop();
+
   return (
     <div className="flex flex-col justify-center items-center w-full h-full gap-2">
-      <div className="flex flex-row justify-center items-center w-full h-full gap-6">
-        <div className="flex flex-col justify-center items-center gap-2 w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
-          <div className="flex flex-col gap-2 w-[70%]">
-            <label htmlFor="name" className="text-2xl text-secondary font-bold">
-              Nome da Barbearia
-            </label>
-            <label htmlFor=""></label>
-            <Input className="h-10 bg-surface" id="fullName"></Input>
-          </div>
-          <div className="flex flex-col gap-2 w-[70%]">
-            <label htmlFor="name" className="text-2xl text-secondary font-bold">
-              CNPJ
-            </label>
-            <Input className="h-10 bg-surface" id="fullName"></Input>
-          </div>
-          <div className="flex flex-col gap-2 w-[70%]">
-            <label htmlFor="name" className="text-2xl text-secondary font-bold">
-              CEP
-            </label>
-            <Input className="h-10 bg-surface" id="fullName"></Input>
-          </div>
-          <div className="flex flex-col gap-2 w-[70%]">
-            <label htmlFor="name" className="text-2xl text-secondary font-bold">
-              Estado
-            </label>
-            <Input className="h-10 bg-surface" id="fullName"></Input>
-          </div>
-        </div>
-        <div className="flex flex-col justify-center items-center gap-2 w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
-          <div className="flex flex-col gap-3 w-[70%]">
-            <label htmlFor="name" className="text-2xl text-secondary font-bold">
-              Cidade
-            </label>
-            <Input className="h-10 bg-surface" id="fullName"></Input>
-          </div>
-          <div className="flex flex-col gap-2 w-[70%]">
-            <label htmlFor="name" className="text-2xl text-secondary font-bold">
-              Endereço
-            </label>
-            <Input className="h-10 bg-surface" id="fullName"></Input>
-          </div>
-          <div className="flex flex-col gap-2 w-[70%]">
-            <label htmlFor="name" className="text-2xl text-secondary font-bold">
-              Número de Endereço
-            </label>
-            <Input className="h-10 bg-surface" id="fullName"></Input>
-          </div>
-        </div>
-      </div>
+      <form
+        className="flex flex-col justify-center items-center w-full h-full gap-2"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="flex flex-row justify-center items-center w-full h-full gap-6">
+          <div className="flex flex-col justify-center items-center gap-2 w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
+            <div className="flex flex-col gap-2 w-[70%]">
+              <label
+                htmlFor="barberShopName"
+                className="text-2xl text-secondary font-bold"
+              >
+                Nome da Barbearia
+              </label>
 
-      <button className="flex flex-row justify-center p-2 bg-secondary text-surface font-bold text-2xl rounded-md hover:bg-hover-secondary cursor-pointer mt-3 w-[25%]">
-        Cadastrar Barbearia
-      </button>
+              {errors.barberShopName && (
+                <p className="text-red-500">{errors.barberShopName.message}</p>
+              )}
+
+              <Controller
+                name="barberShopName"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    className="h-10 bg-surface"
+                    id={field.name}
+                    name={field.name}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    defaultValue={field.value}
+                  ></Input>
+                )}
+              ></Controller>
+            </div>
+            <div className="flex flex-col gap-2 w-[70%]">
+              <label
+                htmlFor="cnpj"
+                className="text-2xl text-secondary font-bold"
+              >
+                CNPJ
+              </label>
+
+              {errors.cnpj && (
+                <p className="text-red-500">{errors.cnpj.message}</p>
+              )}
+
+              <Controller
+                name="cnpj"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    className="h-10 bg-surface"
+                    id={field.name}
+                    name={field.name}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    defaultValue={field.value}
+                  ></Input>
+                )}
+              ></Controller>
+            </div>
+
+            <div className="flex flex-col gap-2 w-[70%]">
+              <label
+                htmlFor="cep"
+                className="text-2xl text-secondary font-bold"
+              >
+                CEP
+              </label>
+
+              {errors.cep && (
+                <p className="text-red-500">{errors.cep.message}</p>
+              )}
+
+              <Controller
+                name="cep"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    className="h-10 bg-surface"
+                    id={field.name}
+                    name={field.name}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    defaultValue={field.value}
+                  ></Input>
+                )}
+              ></Controller>
+            </div>
+            <div className="flex flex-col gap-2 w-[70%]">
+              <label
+                htmlFor="name"
+                className="text-2xl text-secondary font-bold"
+              >
+                Estado
+              </label>
+
+              {errors.state && (
+                <p className="text-red-500">{errors.state.message}</p>
+              )}
+
+              <Controller
+                name="state"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    placeholder="Selecione o estado"
+                    className="bg-surface"
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue></SelectValue>
+                    </SelectTrigger>
+                    <SelectContent className="shadow-md bg-surface">
+                      <SelectGroup>
+                        <SelectLabel className="text-zinc-400 font-bold">
+                          Norte
+                        </SelectLabel>
+                        {North.map((currentState: StateType) => (
+                          <SelectItem
+                            key={currentState.value}
+                            id={currentState.value}
+                            className="hover:bg-hover-secondary"
+                          >
+                            {currentState.state}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                      <SelectGroup>
+                        <SelectLabel className="text-zinc-400 font-bold">
+                          Nordeste
+                        </SelectLabel>
+                        {NorthEast.map((currentState: StateType) => (
+                          <SelectItem
+                            key={currentState.value}
+                            id={currentState.value}
+                            className="hover:bg-hover-secondary"
+                          >
+                            {currentState.state}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                      <SelectGroup>
+                        <SelectLabel className="text-zinc-400 font-bold">
+                          Centro-Oeste
+                        </SelectLabel>
+                        {CentralWest.map((currentState: StateType) => (
+                          <SelectItem
+                            key={currentState.value}
+                            id={currentState.value}
+                            className="hover:bg-hover-secondary"
+                          >
+                            {currentState.state}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                      <SelectGroup>
+                        <SelectLabel className="text-zinc-400 font-bold">
+                          Sudeste
+                        </SelectLabel>
+                        {SouthEast.map((currentState: StateType) => (
+                          <SelectItem
+                            key={currentState.value}
+                            id={currentState.value}
+                            className="hover:bg-hover-secondary"
+                          >
+                            {currentState.state}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                      <SelectGroup>
+                        <SelectLabel className="text-zinc-400 font-bold">
+                          Sul
+                        </SelectLabel>
+                        {South.map((currentState: StateType) => (
+                          <SelectItem
+                            key={currentState.value}
+                            id={currentState.value}
+                            className="hover:bg-hover-secondary"
+                          >
+                            {currentState.state}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+              ></Controller>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center items-center gap-2 w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
+            <div className="flex flex-col gap-3 w-[70%]">
+              <label
+                htmlFor="city"
+                className="text-2xl text-secondary font-bold"
+              >
+                Cidade
+              </label>
+
+              {errors.city && (
+                <p className="text-red-500">{errors.city.message}</p>
+              )}
+
+              <Controller
+                name="city"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    className="h-10 bg-surface"
+                    id={field.name}
+                    name={field.name}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    defaultValue={field.value}
+                  ></Input>
+                )}
+              ></Controller>
+            </div>
+            <div className="flex flex-col gap-2 w-[70%]">
+              <label
+                htmlFor="address"
+                className="text-2xl text-secondary font-bold"
+              >
+                Endereço
+              </label>
+
+              {errors.address && (
+                <p className="text-red-500">{errors.address.message}</p>
+              )}
+
+              <Controller
+                name="address"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    className="h-10 bg-surface"
+                    id={field.name}
+                    name={field.name}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    defaultValue={field.value}
+                  ></Input>
+                )}
+              ></Controller>
+            </div>
+            <div className="flex flex-col gap-2 w-[70%]">
+              <label
+                htmlFor="numberAddress"
+                className="text-2xl text-secondary font-bold"
+              >
+                Número de Endereço
+              </label>
+
+              {errors.numberAddress && (
+                <p className="text-red-500">{errors.numberAddress.message}</p>
+              )}
+
+              <Controller
+                name="numberAddress"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    className="h-10 bg-surface"
+                    id={field.name}
+                    name={field.name}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    defaultValue={field.value}
+                  ></Input>
+                )}
+              ></Controller>
+            </div>
+          </div>
+        </div>
+
+        <button className="flex flex-row justify-center p-2 bg-secondary text-surface font-bold text-2xl rounded-md hover:bg-hover-secondary cursor-pointer mt-3 w-[25%]">
+          Cadastrar Barbearia
+        </button>
+      </form>
     </div>
   );
 }
