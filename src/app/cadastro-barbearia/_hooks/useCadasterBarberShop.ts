@@ -1,8 +1,15 @@
+/* COISAS A SE FAZER:
+
+  1 - PERMITIR O CADASTRO DE BARBEARIA
+
+*/
+
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller } from "react-hook-form";
 import CepType from "../_type/type";
+import { createClient } from "@/lib/supabase/client";
 
 const cadasterBarberShopSchema = yup.object({
   barberShopName: yup.string().required("*Este campo é obrigatório"),
@@ -43,8 +50,22 @@ export default function useCadasterBarberShop() {
     resolver: yupResolver(cadasterBarberShopSchema),
   });
 
-  const onSubmit = (data: cadasterBarberShopType) => {
-    console.log(data);
+  const onSubmit = async (dataBarberShop: cadasterBarberShopType) => {
+    const supabase = createClient();
+
+    const { data } = await supabase.auth.getUser();
+
+    await supabase.from("barber_shop").insert({
+      barber_id: data.user?.id,
+      barber_shop_name: dataBarberShop.barberShopName,
+      cnpj: dataBarberShop.cnpj,
+      cep: Number(dataBarberShop.cep),
+      state: dataBarberShop.state.toLowerCase(),
+      city: dataBarberShop.city,
+      street_number: dataBarberShop.numberAddress,
+      street_address: dataBarberShop.address,
+    });
+
     return;
   };
 

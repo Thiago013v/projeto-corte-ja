@@ -21,9 +21,7 @@ import useCadasterBarberShop from "../_hooks/useCadasterBarberShop";
 import { ChangeEvent } from "react";
 
 /* PRÓXIMOS OBJETIVOS: 
-
-    1 - ADICIONAR RESPONSIVIDADE
-    2 - PERMITIR O CADASTRO DE UMA NOVA BARBEARIA
+    1 - PERMITIR O CADASTRO DE UMA NOVA BARBEARIA
 */
 
 export default function CardsCadasterBarberShop() {
