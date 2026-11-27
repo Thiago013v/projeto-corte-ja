@@ -30,7 +30,6 @@ export default function useCadasterBarberShop() {
     handleSubmit,
     formState: { errors },
     setValues,
-    watch,
   } = useForm({
     defaultValues: {
       barberShopName: "",

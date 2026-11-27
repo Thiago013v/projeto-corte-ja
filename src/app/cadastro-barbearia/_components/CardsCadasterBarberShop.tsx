@@ -36,8 +36,8 @@ export default function CardsCadasterBarberShop() {
         className="flex flex-col justify-center items-center w-full h-full gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-row justify-center items-center w-full h-full gap-6">
-          <div className="flex flex-col justify-center items-center gap-2 w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
+        <div className="flex flex-col md:flex-row justify-center items-center w-full h-full gap-6">
+          <div className="flex flex-col justify-center items-center gap-2 max-sm:w-full max-lg:w-[60%] lg:w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
             <div className="flex flex-col gap-2 w-[70%]">
               <label
                 htmlFor="barberShopName"
@@ -229,7 +229,7 @@ export default function CardsCadasterBarberShop() {
               ></Controller>
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center gap-2 w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
+          <div className="flex flex-col justify-center items-center gap-2 max-sm:w-full max-lg:w-[60%] lg:w-[30%] h-full bg-cards p-6 shadow-md rounded-md">
             <div className="flex flex-col gap-3 w-[70%]">
               <label
                 htmlFor="city"
@@ -317,7 +317,7 @@ export default function CardsCadasterBarberShop() {
           </div>
         </div>
 
-        <button className="flex flex-row justify-center p-2 bg-secondary text-surface font-bold text-2xl rounded-md hover:bg-hover-secondary cursor-pointer mt-3 w-[25%]">
+        <button className="flex flex-row justify-center p-2 bg-secondary text-surface font-bold text-2xl rounded-md hover:bg-hover-secondary cursor-pointer mt-3 max-sm:w-[90%] max-lg:w-[50%] lg:w-[25%] max-lg:mb-4">
           Cadastrar Barbearia
         </button>
       </form>
