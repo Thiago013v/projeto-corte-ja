@@ -86,7 +86,7 @@ export default function RootLayout({
                 <li>
                   {user && isBarber && (
                     <Link
-                      href="/cadastro-usuario"
+                      href="/cadastro-barbearia"
                       className="bg-secondary p-2 rounded-md text-surface hover:bg-hover-secondary text-[15px] sm:text-[1.1rem]"
                     >
                       Cadastrar Barbearia

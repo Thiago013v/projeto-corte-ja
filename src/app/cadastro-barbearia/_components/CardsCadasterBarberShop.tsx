@@ -1,6 +1,5 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -19,6 +18,7 @@ import {
   North,
 } from "../../../lib/states/states";
 import useCadasterBarberShop from "../_hooks/useCadasterBarberShop";
+import { ChangeEvent } from "react";
 
 /* PRÓXIMOS OBJETIVOS: 
 
@@ -27,7 +27,7 @@ import useCadasterBarberShop from "../_hooks/useCadasterBarberShop";
 */
 
 export default function CardsCadasterBarberShop() {
-  const { Controller, control, errors, handleSubmit, onSubmit } =
+  const { Controller, control, errors, handleSubmit, onSubmit, getCep } =
     useCadasterBarberShop();
 
   return (
@@ -54,15 +54,15 @@ export default function CardsCadasterBarberShop() {
                 name="barberShopName"
                 control={control}
                 render={({ field }) => (
-                  <Input
-                    className="h-10 bg-surface"
+                  <input
+                    className="h-10 bg-surface rounded-md border border-black p-2"
                     id={field.name}
                     name={field.name}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}
-                    defaultValue={field.value}
-                  ></Input>
+                    value={field.value}
+                  ></input>
                 )}
               ></Controller>
             </div>
@@ -82,15 +82,15 @@ export default function CardsCadasterBarberShop() {
                 name="cnpj"
                 control={control}
                 render={({ field }) => (
-                  <Input
-                    className="h-10 bg-surface"
+                  <input
+                    className="h-10 bg-surface rounded-md border border-black p-2"
                     id={field.name}
                     name={field.name}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}
-                    defaultValue={field.value}
-                  ></Input>
+                    value={field.value}
+                  ></input>
                 )}
               ></Controller>
             </div>
@@ -111,15 +111,18 @@ export default function CardsCadasterBarberShop() {
                 name="cep"
                 control={control}
                 render={({ field }) => (
-                  <Input
-                    className="h-10 bg-surface"
+                  <input
+                    className="h-10 bg-surface rounded-md border border-black p-2"
                     id={field.name}
                     name={field.name}
-                    onChange={field.onChange}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      field.onChange(e.target.value);
+                      getCep(e.target.value);
+                    }}
                     onBlur={field.onBlur}
                     ref={field.ref}
-                    defaultValue={field.value}
-                  ></Input>
+                    value={field.value}
+                  ></input>
                 )}
               ></Controller>
             </div>
@@ -144,7 +147,7 @@ export default function CardsCadasterBarberShop() {
                     className="bg-surface"
                     onChange={field.onChange}
                     onBlur={field.onBlur}
-                    defaultValue={field.value}
+                    value={field.value}
                   >
                     <SelectTrigger>
                       <SelectValue></SelectValue>
@@ -243,15 +246,15 @@ export default function CardsCadasterBarberShop() {
                 name="city"
                 control={control}
                 render={({ field }) => (
-                  <Input
-                    className="h-10 bg-surface"
+                  <input
+                    className="h-10 bg-surface rounded-md border border-black p-2"
                     id={field.name}
                     name={field.name}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}
-                    defaultValue={field.value}
-                  ></Input>
+                    value={field.value}
+                  ></input>
                 )}
               ></Controller>
             </div>
@@ -271,15 +274,15 @@ export default function CardsCadasterBarberShop() {
                 name="address"
                 control={control}
                 render={({ field }) => (
-                  <Input
-                    className="h-10 bg-surface"
+                  <input
+                    className="h-10 bg-surface rounded-md border border-black p-2"
                     id={field.name}
                     name={field.name}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}
-                    defaultValue={field.value}
-                  ></Input>
+                    value={field.value}
+                  ></input>
                 )}
               ></Controller>
             </div>
@@ -299,15 +302,15 @@ export default function CardsCadasterBarberShop() {
                 name="numberAddress"
                 control={control}
                 render={({ field }) => (
-                  <Input
-                    className="h-10 bg-surface"
+                  <input
+                    className="h-10 bg-surface rounded-md border border-black p-2"
                     id={field.name}
                     name={field.name}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     ref={field.ref}
-                    defaultValue={field.value}
-                  ></Input>
+                    value={field.value}
+                  ></input>
                 )}
               ></Controller>
             </div>
