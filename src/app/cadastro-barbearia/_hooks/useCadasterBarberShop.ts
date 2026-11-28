@@ -9,7 +9,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller } from "react-hook-form";
 import CepType from "../_type/type";
-import { createClient } from "@/lib/supabase/client";
 
 const cadasterBarberShopSchema = yup.object({
   barberShopName: yup.string().required("*Este campo é obrigatório"),
@@ -29,7 +28,9 @@ const cadasterBarberShopSchema = yup.object({
   numberAddress: yup.string().required("*Este campo é obrigatório"),
 });
 
-type cadasterBarberShopType = yup.InferType<typeof cadasterBarberShopSchema>;
+export type cadasterBarberShopType = yup.InferType<
+  typeof cadasterBarberShopSchema
+>;
 
 export default function useCadasterBarberShop() {
   const {
@@ -50,25 +51,6 @@ export default function useCadasterBarberShop() {
     resolver: yupResolver(cadasterBarberShopSchema),
   });
 
-  const onSubmit = async (dataBarberShop: cadasterBarberShopType) => {
-    const supabase = createClient();
-
-    const { data } = await supabase.auth.getUser();
-
-    await supabase.from("barber_shop").insert({
-      barber_id: data.user?.id,
-      barber_shop_name: dataBarberShop.barberShopName,
-      cnpj: dataBarberShop.cnpj,
-      cep: Number(dataBarberShop.cep),
-      state: dataBarberShop.state.toLowerCase(),
-      city: dataBarberShop.city,
-      street_number: dataBarberShop.numberAddress,
-      street_address: dataBarberShop.address,
-    });
-
-    return;
-  };
-
   const getCep = async (userCep: string) => {
     if (userCep.length === 8) {
       const response = await fetch(`https://viacep.com.br/ws/${userCep}/json/`);
@@ -87,7 +69,6 @@ export default function useCadasterBarberShop() {
     control,
     handleSubmit,
     errors,
-    onSubmit,
     Controller,
     getCep,
   };

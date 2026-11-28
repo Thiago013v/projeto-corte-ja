@@ -19,20 +19,17 @@ import {
 } from "../../../lib/states/states";
 import useCadasterBarberShop from "../_hooks/useCadasterBarberShop";
 import { ChangeEvent } from "react";
-
-/* PRÓXIMOS OBJETIVOS: 
-    1 - PERMITIR O CADASTRO DE UMA NOVA BARBEARIA
-*/
+import { cadasterBarberShop } from "@/lib/supabase/barberShop";
 
 export default function CardsCadasterBarberShop() {
-  const { Controller, control, errors, handleSubmit, onSubmit, getCep } =
+  const { Controller, control, errors, handleSubmit, getCep } =
     useCadasterBarberShop();
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full gap-2">
       <form
         className="flex flex-col justify-center items-center w-full h-full gap-2"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(cadasterBarberShop)}
       >
         <div className="flex flex-col md:flex-row justify-center items-center w-full h-full gap-6">
           <div className="flex flex-col justify-center items-center gap-2 max-sm:w-full max-lg:w-[60%] lg:w-[30%] h-full bg-cards p-6 shadow-md rounded-md">

@@ -1,15 +1,15 @@
-import CardsCadasterBarberShop from "./_components/CardsCadasterBarberShop";
+import BarberShopComponent from "./_components/BarberShopComponent";
+import { Suspense } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
-export default function PageCadasterBarberShop() {
+export default async function PageCadasterBarberShop() {
   return (
-    <main className="flex flex-col justify-center items-center">
-      <h1 className="max-sm:text-[0.9rem] max-lg:mt-4 text text-center text-red-500 font-bold mb-10">
-        *É necessário ter uma conta de barbeiro criada
-      </h1>
-
-      <div className="flex flex-row justify-center items-center gap-4 w-full">
-        <CardsCadasterBarberShop></CardsCadasterBarberShop>
-      </div>
-    </main>
+    <div className="w-full h-full flex flex-row justify-center items-center">
+      <Suspense
+        fallback={<Spinner className="w-100 h-25 text-secondary"></Spinner>}
+      >
+        <BarberShopComponent></BarberShopComponent>
+      </Suspense>
+    </div>
   );
 }
