@@ -28,7 +28,7 @@ export default async function BarberShopComponent() {
   return (
     <main className="flex flex-col justify-center items-center w-full h-full">
       <h1 className="max-sm:text-[0.9rem] max-lg:mt-4 text text-center text-red-500 font-bold mb-10">
-        *É necessário ter uma conta de barbeiro criada
+        *É necessário ter uma conta de barbeiro criada e estar logada nela
       </h1>
 
       <div className="flex flex-row justify-center items-center gap-4 w-full">
