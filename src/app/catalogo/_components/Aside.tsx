@@ -8,14 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { StateType } from "../_states/states";
+import type { StateType } from "../../../lib/states/states";
 import {
   SouthEast,
   South,
   CentralWest,
   NorthEast,
   North,
-} from "../_states/states";
+} from "../../../lib/states/states";
 
 export default function Aside() {
   return (

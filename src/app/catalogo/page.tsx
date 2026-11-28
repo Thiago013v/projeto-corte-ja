@@ -5,7 +5,7 @@ import { ButtonGroup } from "@/components/ui/button-group";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 
-export default function Catalogo() {
+export default async function Catalogo() {
   return (
     <main className="flex flex-col lg:grid lg:grid-cols-[0.5fr_1fr] lg:grid-rows-[1fr]">
       <Aside></Aside>
